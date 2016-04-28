@@ -1,6 +1,7 @@
 # Mini CI Loop
 
 A dashboard showing the results from the mini CI loop tests for a device.
+The build process generates a standalone index.html file.
 
 ## Build Instructions
 
@@ -40,7 +41,16 @@ cd minici
 npm install
 ```
 
-5. Build the index.html file
+### Build
+Build the index.html file
 ```
+# Select the version to use
+nvm ls
+nvm use v4.4.3
 gulp
+```
+
+### Run the tests
+```
+npm test
 ```

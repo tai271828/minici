@@ -29,7 +29,7 @@ var NUMBER_OF_DAYS = 7;
 
 var Index = React.createClass({
 	getInitialState: function() {
-		return {records: [], toDate: moment()};
+		return {records: this.props.records || RESULTS.records || [], toDate: moment()};
 	},
 
 	componentDidMount: function() {
@@ -37,7 +37,7 @@ var Index = React.createClass({
 	},
 
 	analyseTrends: function() {
-		var records = RESULTS.records || [];
+		var records = this.state.records;
 		var analysed = [];
 
 		var toDate;
