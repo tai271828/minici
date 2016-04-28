@@ -1,0 +1,30 @@
+// Import the theme
+@import "../../node_modules/ubuntu-vanilla-theme/scss/theme";
+// Run the theme
+@include ubuntu-vanilla-theme;
+
+
+// Customise theme
+div.alert {
+	color: $error;
+	border-color: $error;
+}
+
+nav div.logo h1 {
+	color: #fff;
+	font-height: 2em;
+	margin: 0;
+}
+
+.dropzone {
+	padding: 20px;
+	border: 2px #ccc dotted;
+}
+
+tbody.unshaded td {
+	background-color: #fff;
+}
+
+td {
+	text-align: left !important;
+}
