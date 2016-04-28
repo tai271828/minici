@@ -86,5 +86,4 @@ gulp.task('index.html', ['build'], function() {
 })
 
 // Default: remember that these tasks get run asynchronously
-//gulp.task('default', ['set-prod-node-env', 'index.html', 'sass', 'clean']);
-gulp.task('default', ['index.html', 'sass', 'clean']);
+gulp.task('default', ['set-prod-node-env', 'index.html', 'sass', 'clean']);
