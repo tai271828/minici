@@ -19,12 +19,11 @@
 var React = require('react');
 var moment = require('moment');
 var LegendSummary = require('./LegendSummary');
-var ChartIcon = require('./ChartIcon');
+var ChartColumnSelect = require('./ChartColumnSelect');
 var Helper = require('./Helper');
 
 
 var MAX_SIZE = 100;
-var ICON_SIZE = 50;
 var NUMBER_OF_DAYS = 7;
 
 
@@ -44,10 +43,12 @@ var Index = React.createClass({
 		var toDate;
 		var formFactor;
 		var canonicalId;
+		var release;
 		if (records.length > 0) {
 			toDate = moment(records[0].date);
 			formFactor = records[0].formfactor;
 			canonicalId = records[0].canonical_id;
+			release = records[0].release;
 		}
 
 		for (var i=0; i<records.length - 1; i++) {
@@ -77,7 +78,8 @@ var Index = React.createClass({
 		}
 		// We're ignoring the last record as we don't know the trend for that
 		analysed.reverse();
-		this.setState({records: analysed, toDate: records[0].date, formFactor: formFactor, canonicalId: canonicalId});
+		this.setState({records: analysed, toDate: records[0].date, formFactor: formFactor, canonicalId: canonicalId,
+									 release: release});
 	},
 
 	// Reorganise the submissions into the dates they occur
@@ -113,13 +115,13 @@ var Index = React.createClass({
             <h2>Dashboard</h2>
 						<div className="twelve-col">
 							<h3>{this.state.canonicalId}</h3>
-							<h4 className="formfactor">{this.state.formFactor}</h4>
+							<h4 className="formfactor">{this.state.formFactor} {this.state.release}</h4>
 							<div className="twelve-col">
 									<div className="eight-col box">
 										{columns.map(function(rec) {
 											return (
 												<div className="one-col" key={rec.index}>
-														<ChartIcon column={rec} />
+														<ChartColumnSelect column={rec} />
 												</div>
 											);
 										})}
