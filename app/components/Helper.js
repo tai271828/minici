@@ -20,7 +20,8 @@ var Helper = {
 	BETTER: 'Better',
   WORSE: 'Worse',
 	UNKNOWN: 'Unknown',
-	UNCHANGED: 'Stable'
+	UNCHANGED: 'Stable',
+	CERTIFICATION: 'https://certification.canonical.com/'
 }
 
 module.exports = Helper;

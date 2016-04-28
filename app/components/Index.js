@@ -114,7 +114,7 @@ var Index = React.createClass({
           <section className="row no-border">
             <h2>Dashboard</h2>
 						<div className="twelve-col">
-							<h3>{this.state.canonicalId}</h3>
+							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a></h3>
 							<h4 className="formfactor">{this.state.formFactor} {this.state.release}</h4>
 							<div className="twelve-col">
 									<div className="eight-col box">
