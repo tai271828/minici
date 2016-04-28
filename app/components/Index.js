@@ -18,6 +18,7 @@
 
 var React = require('react');
 var moment = require('moment');
+var LegendSummary = require('./LegendSummary');
 
 
 var MAX_SIZE = 100;
@@ -43,8 +44,12 @@ var Index = React.createClass({
 		var analysed = [];
 
 		var toDate;
+		var formFactor;
+		var canonicalId;
 		if (records.length > 0) {
 			toDate = moment(records[0].date);
+			formFactor = records[0].formfactor;
+			canonicalId = records[0].canonical_id;
 		}
 
 		for (var i=0; i<records.length - 1; i++) {
@@ -74,7 +79,7 @@ var Index = React.createClass({
 		}
 		// We're ignoring the last record as we don't know the trend for that
 		analysed.reverse();
-		this.setState({records: analysed, toDate: records[0].date});
+		this.setState({records: analysed, toDate: records[0].date, formFactor: formFactor, canonicalId: canonicalId});
 	},
 
 	renderIconColumn: function(column) {
@@ -84,10 +89,11 @@ var Index = React.createClass({
 		if (!column.record) {
 			return (
 				<div key={'key' + index}>
+					<div className="padding"></div>
 					<svg width={ICON_SIZE} height={ICON_SIZE} title={title}>
 						<rect width={ICON_SIZE} height={ICON_SIZE} style={{fill:'white', fillOpacity:0.0}} />
 					</svg>
-					<p>{column.date}</p>
+					<p className="chart-labelx">{column.date}</p>
 				</div>
 			);
 		}
@@ -97,37 +103,41 @@ var Index = React.createClass({
 		if (rec.trend === BETTER) {
 			return (
 				<div key={index} title={title}>
+					<div className="padding"></div>
 					<svg width={ICON_SIZE} height={ICON_SIZE}>
 						<rect width={ICON_SIZE} height={ICON_SIZE} style={{fill:'green', fillOpacity:0.5, rx:5, ry:5}} />
 					</svg>
-					<p>{column.date}</p>
+					<p className="chart-labelx">{column.date}</p>
 				</div>
 			)
 		} else if (rec.trend === WORSE) {
 			return (
 				<div key={index} title={title}>
+					<div className="padding"></div>
 					<svg width={ICON_SIZE} height={ICON_SIZE}>
 						<rect width={ICON_SIZE} height={ICON_SIZE} style={{fill:'red', fillOpacity:0.8}} transform="rotate(45 25 25)" />
 					</svg>
-					<p>{column.date}</p>
+					<p className="chart-labelx">{column.date}</p>
 				</div>
 			)
 		} else if (rec.trend === UNKNOWN) {
 			return (
 				<div key={index} title={title}>
+					<div className="padding"></div>
 					<svg width={ICON_SIZE} height={ICON_SIZE}>
 						<rect width={ICON_SIZE} height={ICON_SIZE} style={{fill:'orange', fillOpacity:0.5, rx:50, ry:50}} />
 					</svg>
-					<p>{column.date}</p>
+					<p className="chart-labelx">{column.date}</p>
 				</div>
 			)
 		} else {
 			return (
 				<div key={index} title={title}>
+					<div className="padding"></div>
 					<svg width={ICON_SIZE} height={ICON_SIZE}>
 						<rect width={ICON_SIZE} height={ICON_SIZE} style={{fill:'black', fillOpacity:0.5, rx:5, ry:5}} />
 					</svg>
-					<p>{column.date}</p>
+					<p className="chart-labelx">{column.date}</p>
 				</div>
 			)
 		}
@@ -159,14 +169,15 @@ var Index = React.createClass({
   render: function() {
 		var self = this;
 		var columns = this.pivotOnDate();
-		console.log(columns);
 
     return (
         <div className="inner-wrapper">
 
           <section className="row no-border">
             <h2>Dashboard</h2>
-						<div>
+						<div className="twelve-col box">
+							<h3>{this.state.canonicalId}</h3>
+							<h4 className="formfactor">{this.state.formFactor}</h4>
 							<div className="twelve-col">
 									{columns.map(function(rec) {
 										return (
@@ -175,6 +186,7 @@ var Index = React.createClass({
 											</div>
 										);
 									})}
+									<LegendSummary />
 							</div>
 						</div>
           </section>
