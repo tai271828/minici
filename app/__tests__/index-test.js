@@ -28,13 +28,13 @@ jest.dontMock('moment');
 // Test fixture
 var RESULTS = {
 	"records": [
-		{"pass": 10, "skip": 1, "fail": 5, "total": 16, "date": "2016-04-26", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "pastebin": "https://pastebin.canonical.com/152844/"},
-		{"pass": 8, "skip": 1, "fail": 7, "total": 16, "date": "2016-04-25", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "pastebin": "https://pastebin.canonical.com/152844/"},
-		{"pass": 12, "skip": 0, "fail": 4, "total": 16, "date": "2016-04-23", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "pastebin": "https://pastebin.canonical.com/152844/"},
-		{"pass": 11, "skip": 2, "fail": 3, "total": 16, "date": "2016-04-22", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "pastebin": "https://pastebin.canonical.com/152844/"},
-		{"pass": 8, "skip": 1, "fail": 7, "total": 16, "date": "2016-04-20", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "pastebin": "https://pastebin.canonical.com/152844/"},
-		{"pass": 12, "skip": 0, "fail": 4, "total": 16, "date": "2016-04-19", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "pastebin": "https://pastebin.canonical.com/152844/"},
-		{"pass": 11, "skip": 2, "fail": 3, "total": 16, "date": "2016-04-18", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "pastebin": "https://pastebin.canonical.com/152844/"}
+		{"passed": 10, "skipped": 1, "failed": 5, "total": 16, "date": "2016-04-26", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "checkbox_log_url": "https://pastebin.canonical.com/152844/"},
+		{"passed": 8, "skipped": 1, "failed": 7, "total": 16, "date": "2016-04-25", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "checkbox_log_url": "https://pastebin.canonical.com/152844/"},
+		{"passed": 12, "skipped": 0, "failed": 4, "total": 16, "date": "2016-04-23", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "checkbox_log_url": "https://pastebin.canonical.com/152844/"},
+		{"passed": 11, "skipped": 2, "failed": 3, "total": 16, "date": "2016-04-22", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "checkbox_log_url": "https://pastebin.canonical.com/152844/"},
+		{"passed": 8, "skipped": 1, "failed": 7, "total": 16, "date": "2016-04-20", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "checkbox_log_url": "https://pastebin.canonical.com/152844/"},
+		{"passed": 12, "skipped": 0, "failed": 4, "total": 16, "date": "2016-04-19", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "checkbox_log_url": "https://pastebin.canonical.com/152844/"},
+		{"passed": 11, "skipped": 2, "failed": 3, "total": 16, "date": "2016-04-18", "release": "16.04", "formfactor": "server", "canonical_id": "201504-18263", "submission_id": 103997, "checkbox_log_url": "https://pastebin.canonical.com/152844/"}
 	]
 }
 

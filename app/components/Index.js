@@ -54,8 +54,8 @@ var Index = React.createClass({
 		for (var i=0; i<records.length - 1; i++) {
 			var current = records[i];
 			var previous = records[i+1];
-			var currentScore = current.pass - current.fail;
-			var previousScore = previous.pass - previous.fail;
+			var currentScore = current.passed - current.failed;
+			var previousScore = previous.passed - previous.failed;
 
 			// Set the trend by comparing with the previous submission
 			if (currentScore > previousScore) {
@@ -64,7 +64,7 @@ var Index = React.createClass({
 				current.trend = Helper.WORSE;
 			} else {
 				// Scores are the same, so check that pass/fail numbers are the same
-				if ((current.pass === previous.pass) && (current.fail === previous.fail)) {
+				if ((current.passed === previous.passed) && (current.failed === previous.failed)) {
 					current.trend = Helper.UNCHANGED;
 				} else {
 					current.trend = Helper.UNKNOWN;

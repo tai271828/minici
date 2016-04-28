@@ -37,7 +37,7 @@ var ChartColumn = React.createClass({
   				</svg>
         </a>
 				<p className="chart-labelx">{this.props.column.date}</p>
-        {this.props.column.record ? <p><a href={this.props.column.record.pastebin}>Log</a></p> : ''}
+        {this.props.column.record ? <p><a href={this.props.column.record.checkbox_log_url}>Log</a></p> : ''}
 			</div>
 		);
 	}

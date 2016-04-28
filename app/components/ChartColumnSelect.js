@@ -35,7 +35,7 @@ var ChartColumnSelect = React.createClass({
 			);
 		}
 
-		var title = 'Passed='.concat(rec.pass,' Failed=',rec.fail, ' Days Ago=', rec.daysFromDate);
+		var title = 'Passed='.concat(rec.passed,' Failed=',rec.failed, ' Days Ago=', rec.daysFromDate);
 
 		if (rec.trend === Helper.BETTER) {
 			return (
