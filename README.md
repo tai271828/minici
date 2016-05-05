@@ -36,6 +36,7 @@ nvm help
 
 # Install the latest stable version
 nvm install v4.4.3
+```
 
 You may again have the ca issue. Use the following commands before you apply the nvm install.
 ```
@@ -47,7 +48,7 @@ or
 ```
 export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 ```
-
+```
 # Select the version to use
 nvm ls
 nvm use v4.4.3
