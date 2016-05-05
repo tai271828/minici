@@ -19,13 +19,11 @@ version of Node.js to be installed.
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 source ~/.profile
 ```
-
 You may encounter a ca issue if you use Ubuntu (for example, Trusty. This issue could not be reproduced on Xenial). Then use this command instead
 ```
 curl --cacert /etc/ssl/certs/ca-certificates.crt -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 source ~/.profile
 ```
-
 This is caused by the different ca path adapted by Ubuntu and Redhat.
 
 3. Install the latest stable Node.js and npm
