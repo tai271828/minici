@@ -24,6 +24,9 @@ var rename = require('gulp-rename');
 var del = require('del');
 var inline = require('gulp-inline')
 
+// js: components --> (build) --> build --> static/js
+// css: sass --> static/css
+// index.html: inline static/js and static/css into static/index.html
 var path = {
   BASE: 'app/',
   SRC: 'app/',
@@ -50,17 +53,15 @@ gulp.task('compile_components', function(){
         .pipe(gulp.dest(path.BUILD + 'components/'));
 });
 
+// Compile the JSX/ES6 files to Javascript in the build directory
 gulp.task('compile_app', ['compile_components'], function(){
     return gulp.src(path.SRC + '*.js')
         .pipe(babel())
         .pipe(gulp.dest(path.BUILD));
 });
 
-// Clean the build files
-gulp.task('clean', ['build', 'sass'], function() {
-    del([path.BUILD + '**/*']);
-});
-
+// Browserify lets you require('modules') in the browser by
+// bundling up all of your dependencies.
 gulp.task('build', ['compile_app'], function(){
   return gulp.src([path.BUILD + 'app.js'])
     .pipe(browserify({}))
@@ -84,6 +85,12 @@ gulp.task('index.html', ['build'], function() {
   }))
   .pipe(gulp.dest('./'));
 })
+
+// Clean the build files
+gulp.task('clean', ['build', 'sass'], function() {
+    del([path.BUILD + '**/*']);
+});
+
 
 // Default: remember that these tasks get run asynchronously
 gulp.task('default', ['set-prod-node-env', 'index.html', 'sass', 'clean']);
