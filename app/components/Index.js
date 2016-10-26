@@ -113,9 +113,85 @@ var Index = React.createClass({
 
           <section className="row no-border">
             <h2>Dashboard</h2>
+						<table>
+						  <tr>
+						    <th>NODE</th>
+								<th>STATUS</th>
+								<th>DATE</th>
+						  </tr>
+						  <tr>
+							  <td><a id="index.html/#201504-18263-16.04-server">201504-18263 16.04 SERVER</a></td>
+								<td>Pass</td>
+						    <td>2016-10-26</td>
+						  </tr>
+						  <tr>
+						  <td>12345-67890 14.04 Desktop</td>
+							<td>Pass</td>
+							<td>2016-10-26</td>
+						  </tr>
+						</table>
 						<div className="twelve-col">
-							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a></h3>
-							<h4 className="formfactor">{this.state.formFactor} {this.state.release}</h4>
+							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
+							<div className="twelve-col">
+									<div className="eight-col box">
+										{columns.map(function(rec) {
+											return (
+												<div className="one-col" key={rec.index}>
+														<ChartColumnSelect column={rec} />
+												</div>
+											);
+										})}
+									</div>
+									<LegendSummary />
+							</div>
+						</div>
+						<div className="twelve-col">
+							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
+							<div className="twelve-col">
+									<div className="eight-col box">
+										{columns.map(function(rec) {
+											return (
+												<div className="one-col" key={rec.index}>
+														<ChartColumnSelect column={rec} />
+												</div>
+											);
+										})}
+									</div>
+									<LegendSummary />
+							</div>
+						</div>
+						<div className="twelve-col">
+							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
+							<div className="twelve-col">
+									<div className="eight-col box">
+										{columns.map(function(rec) {
+											return (
+												<div className="one-col" key={rec.index}>
+														<ChartColumnSelect column={rec} />
+												</div>
+											);
+										})}
+									</div>
+									<LegendSummary />
+							</div>
+						</div>
+						<section id="201504-18263-16.04-server">
+							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
+							<div className="twelve-col">
+									<div className="eight-col box">
+										{columns.map(function(rec) {
+											return (
+												<div className="one-col" key={rec.index}>
+														<ChartColumnSelect column={rec} />
+												</div>
+											);
+										})}
+									</div>
+									<LegendSummary />
+							</div>
+						</section>
+						<div className="twelve-col">
+							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
 							<div className="twelve-col">
 									<div className="eight-col box">
 										{columns.map(function(rec) {
