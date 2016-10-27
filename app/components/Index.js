@@ -120,7 +120,7 @@ var Index = React.createClass({
 								<th>DATE</th>
 						  </tr>
 						  <tr>
-							  <td><a id="index.html/#201504-18263-16.04-server">201504-18263 16.04 SERVER</a></td>
+							  <td><a href="#201504-18263-16.04-server">201504-18263 16.04 SERVER</a></td>
 								<td>Pass</td>
 						    <td>2016-10-26</td>
 						  </tr>
