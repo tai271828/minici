@@ -120,7 +120,7 @@ var Index = React.createClass({
 								<th>DATE</th>
 						  </tr>
 						  <tr>
-							  <td><a href="#201504-18263-16.04-server">201504-18263 16.04 SERVER</a></td>
+							  <td><a href="#201504-18263-16.04-desktop">201504-18263 16.04 DESKTOP</a></td>
 								<td>Pass</td>
 						    <td>2016-10-26</td>
 						  </tr>
@@ -160,7 +160,22 @@ var Index = React.createClass({
 									<LegendSummary />
 							</div>
 						</div>
-						<div className="twelve-col">
+						<div id="201504-18263-16.04-desktop">
+							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} desktop</h3>
+							<div className="twelve-col">
+									<div className="eight-col box">
+										{columns.map(function(rec) {
+											return (
+												<div className="one-col" key={rec.index}>
+														<ChartColumnSelect column={rec} />
+												</div>
+											);
+										})}
+									</div>
+									<LegendSummary />
+							</div>
+						</div>
+						<div id="201504-18263-16.04-server">
 							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
 							<div className="twelve-col">
 									<div className="eight-col box">
@@ -175,21 +190,6 @@ var Index = React.createClass({
 									<LegendSummary />
 							</div>
 						</div>
-						<section id="201504-18263-16.04-server">
-							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
-							<div className="twelve-col">
-									<div className="eight-col box">
-										{columns.map(function(rec) {
-											return (
-												<div className="one-col" key={rec.index}>
-														<ChartColumnSelect column={rec} />
-												</div>
-											);
-										})}
-									</div>
-									<LegendSummary />
-							</div>
-						</section>
 						<div className="twelve-col">
 							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
 							<div className="twelve-col">
