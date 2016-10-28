@@ -39,27 +39,36 @@ var Index = React.createClass({
 		var formfactor;
 		var cid;
 		var release;
-		var unit;
+		var unit = {
+			records: [],
+			toDate: moment(),
+			formFactor: "",
+			canonicalId: "",
+			release: ""
+		}
 
 		for (var i=0; i<records.length - 1; i++) {
 			var cid = records[i].canonical_id;
 			var formfactor = records[i].formfactor;
 			var release = records[i].release;
-			var unit = cid + formfactor + release;
-			if (!units[unit]) {
-				units[unit] = []
+			var unit_key = cid + formfactor + release;
+			if (!units[unit_key]) {
+				units[unit_key] = unit
 			}
-			units[unit].push(records[i])
+			units[unit_key].records.push(records[i])
 		}
 	},
 
 	componentDidMount: function() {
 		this.getRecordsByCID();
-		this.analyseTrends();
+		for (var unit_key in this.state.units) {
+			this.analyseTrends(unit_key);
+		}
 	},
 
-	analyseTrends: function() {
-		var records = this.state.records;
+	analyseTrends: function(unit_key) {
+		var unit = this.state.units[unit_key];
+		var records = this.state.units[unit_key].records;
 		var analysed = [];
 
 		var toDate;
@@ -100,8 +109,13 @@ var Index = React.createClass({
 		}
 		// We're ignoring the last record as we don't know the trend for that
 		analysed.reverse();
-		this.setState({records: analysed, toDate: records[0].date, formFactor: formFactor, canonicalId: canonicalId,
-									 release: release});
+
+		unit.records = analysed;
+		unit.toDate = records[0].date;
+		unit.fromFactor = formFactor;
+		unit.canonicalId = canonicalId;
+		unit.release = release;
+		this.setState({records: analysed, toDate: records[0].date, formFactor: formFactor, canonicalId: canonicalId, release: release});
 	},
 
 	// Reorganise the submissions into the dates they occur
@@ -115,11 +129,11 @@ var Index = React.createClass({
 				index: i,
 				date: dateDisplay.format('DD MMM'),
 			};
-			self.state.records.map(function(r) {
-				if (dayNumber === r.daysFromDate) {
-					rec.record = r;
-				}
-			});
+			// self.state.records.map(function(r) {
+			// 	if (dayNumber === r.daysFromDate) {
+			// 		rec.record = r;
+			// 	}
+			// });
 
 			columns.push(rec)
 		};
@@ -142,7 +156,7 @@ var Index = React.createClass({
 								<th>DATE</th>
 						  </tr>
 						  <tr>
-							  <td><a href="#201504-18263-16.04-desktop">201504-18263 16.04 DESKTOP</a></td>
+							  <td><a href={"#" + this.state.canonicalId + "-" + this.state.release + "-" + this.state.formFactor}>201504-18263 16.04 DESKTOP</a></td>
 								<td>Pass</td>
 						    <td>2016-10-26</td>
 						  </tr>
