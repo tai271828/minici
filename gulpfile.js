@@ -70,7 +70,7 @@ gulp.task('build', ['compile_app'], function(){
         bundler.require('react');
     })
     .pipe(rename('bundle.js'))
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest(path.DIST + 'js/'));
 });
 
@@ -78,7 +78,7 @@ gulp.task('index.html', ['build'], function() {
   return gulp.src([path.DIST + 'index.html'])
   .pipe(inline({
     base: './',
-    js: uglify,
+    //js: uglify,
     css: uglifycss,
     disabledTypes: [],
     ignore: []
