@@ -36,16 +36,16 @@ var Index = React.createClass({
 		var records = this.state.records;
 		var units = this.state.units;
 
-		var fromFactor;
+		var formfactor;
 		var cid;
 		var release;
 		var unit;
 
 		for (var i=0; i<records.length - 1; i++) {
 			var cid = records[i].canonical_id;
-			var fromFactor = records[i].fromFactor;
+			var formfactor = records[i].formfactor;
 			var release = records[i].release;
-			var unit = cid + fromFactor + release;
+			var unit = cid + formfactor + release;
 			if (!units[unit]) {
 				units[unit] = []
 			}
