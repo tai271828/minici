@@ -29,10 +29,32 @@ var NUMBER_OF_DAYS = 7;
 
 var Index = React.createClass({
 	getInitialState: function() {
-		return {records: this.props.records || RESULTS.records || [], toDate: moment()};
+		return {records: this.props.records || RESULTS.records || [], toDate: moment(), units: {}};
+	},
+
+	getRecordsByCID: function() {
+		var records = this.state.records;
+		var units = this.state.units;
+
+		var fromFactor;
+		var cid;
+		var release;
+		var unit;
+
+		for (var i=0; i<records.length - 1; i++) {
+			var cid = records[i].canonical_id;
+			var fromFactor = records[i].fromFactor;
+			var release = records[i].release;
+			var unit = cid + fromFactor + release;
+			if (!units[unit]) {
+				units[unit] = []
+			}
+			units[unit].push(records[i])
+		}
 	},
 
 	componentDidMount: function() {
+		this.getRecordsByCID();
 		this.analyseTrends();
 	},
 
