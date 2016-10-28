@@ -163,9 +163,9 @@ var Index = React.createClass({
 		for (var unit_key in this.props.units) {
 			var unit = this.props.units[unit_key];
 			var row_cells = [];
-			row_cells.push(<td><a href={"#" + unit.canonicalId + "-" + unit.release + "-" + unit.formFactor}>201504-18263 16.04 DESKTOP</a></td>)
+			row_cells.push(<td><a href={"#" + unit.canonicalId + "-" + unit.release + "-" + unit.formFactor}>{unit.canonicalId + " " + unit.release + " " + unit.formFactor}</a></td>)
 			row_cells.push(<td>NA</td>)
-			row_cells.push(<td>unit.toDate</td>)
+			row_cells.push(<td>{unit.records[0].date}</td>)
 			row_elements.push(row_cells);
 		}
 
