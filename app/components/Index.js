@@ -154,6 +154,7 @@ var Index = React.createClass({
 			columns = columns_group[unit_key];
 		}
 
+		// summary table
 		var row_elements = [];
 		var row_cells_title = [];
 		row_cells_title.push(<td>NODE</td>);
@@ -168,6 +169,8 @@ var Index = React.createClass({
 			row_cells.push(<td>{unit.records[0].date}</td>)
 			row_elements.push(row_cells);
 		}
+
+		// details for each test unit
 
     return (
         <div className="inner-wrapper">
