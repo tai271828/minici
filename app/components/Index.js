@@ -51,7 +51,7 @@ var Index = React.createClass({
 			var cid = records[i].canonical_id;
 			var formfactor = records[i].formfactor;
 			var release = records[i].release;
-			var unit_key = cid + formfactor + release;
+			var unit_key = cid + '-' + formfactor + '-' + release;
 			if (!units[unit_key]) {
 				units[unit_key] = unit
 			}
@@ -153,6 +153,11 @@ var Index = React.createClass({
 			columns = columns_group[unit_key];
 		}
 
+		var anchor_label = [];
+		anchor_label.push(<td><a href={"#" + this.state.canonicalId + "-" + this.state.release + "-" + this.state.formFactor}>201504-18263 16.04 DESKTOP</a></td>)
+		anchor_label.push(<td>Pass</td>)
+		anchor_label.push(<td>2016-10-26</td>)
+
     return (
         <div className="inner-wrapper">
 
@@ -165,9 +170,7 @@ var Index = React.createClass({
 								<th>DATE</th>
 						  </tr>
 						  <tr>
-							  <td><a href={"#" + this.state.canonicalId + "-" + this.state.release + "-" + this.state.formFactor}>201504-18263 16.04 DESKTOP</a></td>
-								<td>Pass</td>
-						    <td>2016-10-26</td>
+							  {anchor_label}
 						  </tr>
 						  <tr>
 						  <td>12345-67890 14.04 Desktop</td>
