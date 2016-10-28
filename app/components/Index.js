@@ -153,10 +153,19 @@ var Index = React.createClass({
 			columns = columns_group[unit_key];
 		}
 
-		var anchor_label = [];
-		anchor_label.push(<td><a href={"#" + this.state.canonicalId + "-" + this.state.release + "-" + this.state.formFactor}>201504-18263 16.04 DESKTOP</a></td>)
-		anchor_label.push(<td>Pass</td>)
-		anchor_label.push(<td>2016-10-26</td>)
+		var row_elements = [];
+		var row_cells_title = [];
+		row_cells_title.push(<td>NODE</td>);
+		row_cells_title.push(<td>STATUS</td>);
+		row_cells_title.push(<td>DATE</td>);
+		row_elements.push(row_cells_title);
+		for (var i=0; i<2; i++) {
+			var row_cells = [];
+			row_cells.push(<td><a href={"#" + this.state.canonicalId + "-" + this.state.release + "-" + this.state.formFactor}>201504-18263 16.04 DESKTOP</a></td>)
+			row_cells.push(<td>Pass</td>)
+			row_cells.push(<td>2016-10-26</td>)
+			row_elements.push(row_cells);
+		}
 
     return (
         <div className="inner-wrapper">
@@ -164,19 +173,13 @@ var Index = React.createClass({
           <section className="row no-border">
             <h2>Dashboard</h2>
 						<table>
-						  <tr>
-						    <th>NODE</th>
-								<th>STATUS</th>
-								<th>DATE</th>
-						  </tr>
-						  <tr>
-							  {anchor_label}
-						  </tr>
-						  <tr>
-						  <td>12345-67890 14.04 Desktop</td>
-							<td>Pass</td>
-							<td>2016-10-26</td>
-						  </tr>
+							{row_elements.map(function(row_cells) {
+								return (
+									<tr>
+										{row_cells}
+									</tr>
+								);
+							})}
 						</table>
 						<div className="twelve-col">
 							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
