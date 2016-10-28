@@ -145,11 +145,13 @@ var Index = React.createClass({
 
   render: function() {
 		var self = this;
+
 		this.getRecordsByCID();
 		var columns_group = {};
 		var columns;
 		for (var unit_key in this.props.units) {
 			columns_group[unit_key] = this.pivotOnDate(this.props.units.records);
+			// TODO: for refactring test, rm ME
 			columns = columns_group[unit_key];
 		}
 
@@ -159,9 +161,10 @@ var Index = React.createClass({
 		row_cells_title.push(<td>STATUS</td>);
 		row_cells_title.push(<td>DATE</td>);
 		row_elements.push(row_cells_title);
-		for (var i=0; i<2; i++) {
+		for (var unit_key in this.props.units) {
+			unit = this.props.units[unit_key];
 			var row_cells = [];
-			row_cells.push(<td><a href={"#" + this.state.canonicalId + "-" + this.state.release + "-" + this.state.formFactor}>201504-18263 16.04 DESKTOP</a></td>)
+			row_cells.push(<td><a href={"#" + unit.canonicalId + "-" + unit.release + "-" + unit.formFactor}>201504-18263 16.04 DESKTOP</a></td>)
 			row_cells.push(<td>Pass</td>)
 			row_cells.push(<td>2016-10-26</td>)
 			row_elements.push(row_cells);
