@@ -34,7 +34,7 @@ var Index = React.createClass({
 
 	getRecordsByCID: function() {
 		var records = this.state.records;
-		var units = this.state.units;
+		var units = {};
 
 		var formfactor;
 		var cid;
@@ -57,10 +57,13 @@ var Index = React.createClass({
 			}
 			units[unit_key].records.push(records[i])
 		}
+
+		this.props.units = units;
+
 	},
 
 	componentDidMount: function() {
-		this.getRecordsByCID();
+		this.state.units = this.props.units;
 		for (var unit_key in this.state.units) {
 			this.analyseTrends(unit_key);
 		}
@@ -129,11 +132,11 @@ var Index = React.createClass({
 				index: i,
 				date: dateDisplay.format('DD MMM'),
 			};
-			// self.state.records.map(function(r) {
-			// 	if (dayNumber === r.daysFromDate) {
-			// 		rec.record = r;
-			// 	}
-			// });
+			self.state.records.map(function(r) {
+				if (dayNumber === r.daysFromDate) {
+					rec.record = r;
+				}
+			});
 
 			columns.push(rec)
 		};
@@ -142,7 +145,13 @@ var Index = React.createClass({
 
   render: function() {
 		var self = this;
-		var columns = this.pivotOnDate();
+		this.getRecordsByCID();
+		var columns_group = {};
+		var columns;
+		for (var unit_key in this.props.units) {
+			columns_group[unit_key] = this.pivotOnDate(this.props.units.records);
+			columns = columns_group[unit_key];
+		}
 
     return (
         <div className="inner-wrapper">
