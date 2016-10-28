@@ -36,18 +36,14 @@ var Index = React.createClass({
 		var records = this.state.records;
 		var units = {};
 
-		var formfactor;
-		var cid;
-		var release;
-		var unit = {
-			records: [],
-			toDate: moment(),
-			formFactor: "",
-			canonicalId: "",
-			release: ""
-		}
-
 		for (var i=0; i<records.length - 1; i++) {
+			var unit = {
+				records: [],
+				toDate: moment(),
+				formFactor: "",
+				canonicalId: "",
+				release: ""
+			}
 			var cid = records[i].canonical_id;
 			var formfactor = records[i].formfactor;
 			var release = records[i].release;
@@ -56,6 +52,9 @@ var Index = React.createClass({
 				units[unit_key] = unit
 			}
 			units[unit_key].records.push(records[i])
+			units[unit_key].formFactor = formfactor;
+			units[unit_key].canonicalId = cid;
+			units[unit_key].release = release;
 		}
 
 		this.props.units = units;
@@ -162,11 +161,11 @@ var Index = React.createClass({
 		row_cells_title.push(<td>DATE</td>);
 		row_elements.push(row_cells_title);
 		for (var unit_key in this.props.units) {
-			unit = this.props.units[unit_key];
+			var unit = this.props.units[unit_key];
 			var row_cells = [];
 			row_cells.push(<td><a href={"#" + unit.canonicalId + "-" + unit.release + "-" + unit.formFactor}>201504-18263 16.04 DESKTOP</a></td>)
-			row_cells.push(<td>Pass</td>)
-			row_cells.push(<td>2016-10-26</td>)
+			row_cells.push(<td>NA</td>)
+			row_cells.push(<td>unit.toDate</td>)
 			row_elements.push(row_cells);
 		}
 
