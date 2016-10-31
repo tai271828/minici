@@ -81,7 +81,7 @@ var Index = React.createClass({
     for (var unit_key in units) {
       var columns = this.pivotOnDate(units[unit_key]);
 			units[unit_key].columns = columns;
-			console.log(columns);
+			//console.log(columns);
     }
 	},
 
