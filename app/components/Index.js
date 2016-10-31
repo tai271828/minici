@@ -26,12 +26,13 @@ var Helper = require('./Helper');
 
 
 var MAX_SIZE = 100;
+var NUMBER_OF_DAYS = 7;
 
 
 var Index = React.createClass({
 	getInitialState: function() {
 		console.log("getInitialState is called.");
-		return {records: this.props.records || RESULTS.records || [], toDate: moment(), units: {}};
+		return {records: this.props.records || RESULTS.records || [], units: {}};
 	},
 
 	componentDidMount: function() {
@@ -40,6 +41,7 @@ var Index = React.createClass({
 		for (var unit_key in this.props.units) {
 			this.analyseTrends(unit_key);
 		}
+		this.getColumnsOfUnit();
 	},
 
 	getUnitsFromRawData: function() {
@@ -53,7 +55,8 @@ var Index = React.createClass({
 				toDate: moment(),
 				formFactor: "",
 				canonicalId: "",
-				release: ""
+				release: "",
+				columns: [],
 			}
 			var cid = records[i].canonical_id;
 			var formfactor = records[i].formfactor;
@@ -72,19 +75,27 @@ var Index = React.createClass({
 
 	},
 
+	getColumnsOfUnit: function() {
+		var units = this.props.units;
+    var columns_group = {};
+    for (var unit_key in units) {
+      var columns = this.pivotOnDate(units[unit_key]);
+			units[unit_key].columns = columns;
+			console.log(columns);
+    }
+	},
+
 	analyseTrends: function(unit_key) {
 		var units = this.props.units;
 		var unit = units[unit_key];
 		var records = units[unit_key].records;
 		var analysed = [];
 
-		var toDate;
 		var formFactor;
 		var canonicalId;
 		var release;
 		console.log("analyseTrends is called.");
 		if (records.length > 0) {
-			toDate = moment(records[0].date);
 			formFactor = records[0].formfactor;
 			canonicalId = records[0].canonical_id;
 			release = records[0].release;
@@ -111,7 +122,7 @@ var Index = React.createClass({
 			}
 
 			// Calculate the number of days from the start date
-			current.daysFromDate = toDate.diff(current.date, 'days')
+			current.daysFromDate = moment().diff(current.date, 'days')
 
 			analysed.push(current);
 		}
@@ -120,7 +131,7 @@ var Index = React.createClass({
 
 		unit.records = analysed;
 		unit.toDate = records[0].date;
-		unit.fromFactor = formFactor;
+		unit.formFactor = formFactor;
 		unit.canonicalId = canonicalId;
 		unit.release = release;
 		units[unit_key] = unit
@@ -128,17 +139,16 @@ var Index = React.createClass({
 	},
 
 	// Reorganise the submissions into the dates they occur
-	pivotOnDate: function(records) {
-		var self = this;
+	pivotOnDate: function(unit) {
 		var columns = [];
 		for (var i=0; i<7; i++) {
 			var dayNumber = NUMBER_OF_DAYS - 1 - i;
-			var dateDisplay = moment(this.state.toDate).subtract(dayNumber, 'days');
+			var dateDisplay = moment(unit.toDate).subtract(dayNumber, 'days');
 			var rec = {
 				index: i,
 				date: dateDisplay.format('DD MMM'),
 			};
-			records.map(function(r) {
+			unit.records.map(function(r) {
 				if (dayNumber === r.daysFromDate) {
 					rec.record = r;
 				}
