@@ -117,7 +117,8 @@ var Index = React.createClass({
 		unit.fromFactor = formFactor;
 		unit.canonicalId = canonicalId;
 		unit.release = release;
-		this.setState({records: analysed, toDate: records[0].date, formFactor: formFactor, canonicalId: canonicalId, release: release});
+		this.state.units[unit_key] = unit
+		this.setState({units: this.state.units});
 	},
 
 	// Reorganise the submissions into the dates they occur
@@ -146,13 +147,13 @@ var Index = React.createClass({
 		var self = this;
 
 		this.getRecordsByCID();
-		var columns_group = {};
-		var columns;
-		for (var unit_key in this.props.units) {
-			columns_group[unit_key] = this.pivotOnDate(this.props.units.records);
+		//var columns_group = {};
+		//var columns;
+		//for (var unit_key in this.props.units) {
+			//columns_group[unit_key] = this.pivotOnDate(this.props.units.records);
 			// TODO: for refactring test, rm ME
-			columns = columns_group[unit_key];
-		}
+			//columns = columns_group[unit_key];
+		//}
 
 		// summary table
 		var row_elements = [];
@@ -186,36 +187,6 @@ var Index = React.createClass({
 								);
 							})}
 						</table>
-						<div className="twelve-col">
-							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} {this.state.formFactor}</h3>
-							<div className="twelve-col">
-									<div className="eight-col box">
-										{columns.map(function(rec) {
-											return (
-												<div className="one-col" key={rec.index}>
-														<ChartColumnSelect column={rec} />
-												</div>
-											);
-										})}
-									</div>
-									<LegendSummary />
-							</div>
-						</div>
-						<div id="201504-18263-16.04-desktop">
-							<h3><a href={Helper.CERTIFICATION.concat('hardware/',this.state.canonicalId, '/')}>{this.state.canonicalId}</a> {this.state.release} desktop</h3>
-							<div className="twelve-col">
-									<div className="eight-col box">
-										{columns.map(function(rec) {
-											return (
-												<div className="one-col" key={rec.index}>
-														<ChartColumnSelect column={rec} />
-												</div>
-											);
-										})}
-									</div>
-									<LegendSummary />
-							</div>
-						</div>
           </section>
 
         </div>
