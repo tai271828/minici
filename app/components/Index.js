@@ -18,6 +18,7 @@
 
 var React = require('react');
 var moment = require('moment');
+var UnitsTable = require('./UnitsTable');
 var LegendSummary = require('./LegendSummary');
 var ChartColumnSelect = require('./ChartColumnSelect');
 var Helper = require('./Helper');
@@ -29,12 +30,22 @@ var NUMBER_OF_DAYS = 7;
 
 var Index = React.createClass({
 	getInitialState: function() {
+		console.log("getInitialState is called.");
 		return {records: this.props.records || RESULTS.records || [], toDate: moment(), units: {}};
 	},
 
-	getRecordsByCID: function() {
+	componentDidMount: function() {
+		console.log("componenDidMount is called.");
+		this.getUnitsFromRawData();
+		for (var unit_key in this.props.units) {
+			this.analyseTrends(unit_key);
+		}
+	},
+
+	getUnitsFromRawData: function() {
 		var records = this.state.records;
 		var units = {};
+		console.log("getRecordsByCID is called.");
 
 		for (var i=0; i<records.length - 1; i++) {
 			var unit = {
@@ -61,13 +72,6 @@ var Index = React.createClass({
 
 	},
 
-	componentDidMount: function() {
-		this.state.units = this.props.units;
-		for (var unit_key in this.state.units) {
-			this.analyseTrends(unit_key);
-		}
-	},
-
 	analyseTrends: function(unit_key) {
 		var units = this.props.units;
 		var unit = units[unit_key];
@@ -78,6 +82,7 @@ var Index = React.createClass({
 		var formFactor;
 		var canonicalId;
 		var release;
+		console.log("analyseTrends is called.");
 		if (records.length > 0) {
 			toDate = moment(records[0].date);
 			formFactor = records[0].formfactor;
@@ -123,7 +128,7 @@ var Index = React.createClass({
 	},
 
 	// Reorganise the submissions into the dates they occur
-	pivotOnDate: function() {
+	pivotOnDate: function(records) {
 		var self = this;
 		var columns = [];
 		for (var i=0; i<7; i++) {
@@ -133,7 +138,7 @@ var Index = React.createClass({
 				index: i,
 				date: dateDisplay.format('DD MMM'),
 			};
-			self.state.records.map(function(r) {
+			records.map(function(r) {
 				if (dayNumber === r.daysFromDate) {
 					rec.record = r;
 				}
@@ -146,49 +151,14 @@ var Index = React.createClass({
 
   render: function() {
 		var self = this;
-
-		this.getRecordsByCID();
-		//var columns_group = {};
-		//var columns;
-		//for (var unit_key in this.props.units) {
-			//columns_group[unit_key] = this.pivotOnDate(this.props.units.records);
-			// TODO: for refactring test, rm ME
-			//columns = columns_group[unit_key];
-		//}
-
-		// summary table
-		var row_elements = [];
-		var row_cells_title = [];
-		row_cells_title.push(<td>NODE</td>);
-		row_cells_title.push(<td>STATUS</td>);
-		row_cells_title.push(<td>DATE</td>);
-		row_elements.push(row_cells_title);
-		for (var unit_key in this.props.units) {
-			var unit = this.props.units[unit_key];
-			var row_cells = [];
-			row_cells.push(<td><a href={"#" + unit.canonicalId + "-" + unit.release + "-" + unit.formFactor}>{unit.canonicalId + " " + unit.release + " " + unit.formFactor}</a></td>)
-			row_cells.push(<td>NA</td>)
-			// TODO: assume the 1st record is the latest.
-			row_cells.push(<td>{unit.records[0].date}</td>)
-			row_elements.push(row_cells);
-		}
-
-		// details for each test unit
+		console.log("render is called.");
 
     return (
         <div className="inner-wrapper">
 
           <section className="row no-border">
             <h2>Dashboard</h2>
-						<table>
-							{row_elements.map(function(row_cells) {
-								return (
-									<tr>
-										{row_cells}
-									</tr>
-								);
-							})}
-						</table>
+						<UnitsTable units={this.state.units}/>
           </section>
 
         </div>
