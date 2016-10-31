@@ -69,8 +69,9 @@ var Index = React.createClass({
 	},
 
 	analyseTrends: function(unit_key) {
-		var unit = this.state.units[unit_key];
-		var records = this.state.units[unit_key].records;
+		var units = this.props.units;
+		var unit = units[unit_key];
+		var records = units[unit_key].records;
 		var analysed = [];
 
 		var toDate;
@@ -117,8 +118,8 @@ var Index = React.createClass({
 		unit.fromFactor = formFactor;
 		unit.canonicalId = canonicalId;
 		unit.release = release;
-		this.state.units[unit_key] = unit
-		this.setState({units: this.state.units});
+		units[unit_key] = unit
+		this.setState({units: units});
 	},
 
 	// Reorganise the submissions into the dates they occur
@@ -167,6 +168,7 @@ var Index = React.createClass({
 			var row_cells = [];
 			row_cells.push(<td><a href={"#" + unit.canonicalId + "-" + unit.release + "-" + unit.formFactor}>{unit.canonicalId + " " + unit.release + " " + unit.formFactor}</a></td>)
 			row_cells.push(<td>NA</td>)
+			// TODO: assume the 1st record is the latest.
 			row_cells.push(<td>{unit.records[0].date}</td>)
 			row_elements.push(row_cells);
 		}
