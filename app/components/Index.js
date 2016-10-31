@@ -26,7 +26,6 @@ var Helper = require('./Helper');
 
 
 var MAX_SIZE = 100;
-var NUMBER_OF_DAYS = 7;
 
 
 var Index = React.createClass({
