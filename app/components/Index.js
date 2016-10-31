@@ -19,6 +19,7 @@
 var React = require('react');
 var moment = require('moment');
 var UnitsTable = require('./UnitsTable');
+var UnitsCharts = require('./UnitsCharts');
 var LegendSummary = require('./LegendSummary');
 var ChartColumnSelect = require('./ChartColumnSelect');
 var Helper = require('./Helper');
@@ -159,6 +160,7 @@ var Index = React.createClass({
           <section className="row no-border">
             <h2>Dashboard</h2>
 						<UnitsTable units={this.state.units}/>
+						<UnitsCharts units={this.state.units}/>
           </section>
 
         </div>
